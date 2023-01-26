@@ -1,0 +1,13 @@
+.board-col {
+    display: grid;
+    grid-template-columns: repeat(8, 90px);
+}
+
+.space {
+    width: 85px;
+    height: 85px;
+    border: 5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
