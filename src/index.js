@@ -6,39 +6,48 @@ const content = document.getElementById('content');
 const board = document.createElement('div');
 
 class Knight {
-    constructor(col, space){
+    constructor(row, col){
+        this.row = row;
         this.col = col;
-        this.space = space;
+    }
+}
+
+class Destination {
+    constructor(row, col){
+        this.row = row;
+        this.col = col;
     }
 }
 
 const chessBoard = (() => {
     for (let i = 0; i < 8; i++){
-        let boardCol = document.createElement('div');
-        boardCol.classList.add('column');
-        boardCol.setAttribute('board-col', i);
+        let boardRow = document.createElement('div');
+        boardRow.classList.add('row');
+        boardRow.setAttribute('row', i);
         function spaceCreate (){
             for(let k = 0; k < 8; k++){
                 const space = document.createElement('div');
-                space.classList.add('space');
-                space.setAttribute('space-num', k);
-                boardCol.append(space);
+                space.classList.add('column');
+                space.setAttribute('column', k);
+                boardRow.append(space);
             }
         }
         spaceCreate();
-        content.append(boardCol);
+        content.append(boardRow);
     }
 })
 
 chessBoard();
 const knight = new Knight(3, 3);
-let knightCol = document.querySelector(`[board-col='${knight.col}']`);
-let knightSpace = knightCol.childNodes[`${knight.space}`];
+let knightRow = document.querySelector(`[row='${knight.row}']`);
+let knightCol = knightRow.childNodes[`${knight.col}`];
 
+console.log(knightRow);
 console.log(knightCol);
-console.log(knightSpace);
 
 document.addEventListener('click', function(event){
-    let destSpace = event.target.getAttribute('space-num');
-    let destCol = event.target.parentNode.getAttribute('board-col');
+    let destCol = event.target.getAttribute('column');
+    let destRow = event.target.parentNode.getAttribute('row');
+    const destination = new Destination(destRow, destCol);
+    console.log(destination);
 })
