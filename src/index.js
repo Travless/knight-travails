@@ -14,6 +14,10 @@ class Node {
         this.col = col;
         this.distance = distance;
     }
+
+    getPositionToString(){
+        return `${this.row}, ${this.col}`;
+    }
 }
 
 // Generates traditional 8x8 chess board to visually represent knight's moves and provides user a simple "point and click" UI
@@ -40,7 +44,7 @@ function getCurrentNeighbors(){
 }
 
 // Create function that takes in the knight's current location and it's destination coordinates, and uses breadth first traversal (level order) to scan the nodes created for the shortest path to the destination
-function knightMoves (knightLocation, knightDestination) {
+function knightMoves (destRow, destCol) {
     // Create queue to house nodes that are processed in a FIFO fashion
     const queue = [];
     // Generate starting node (knight) with "center" coordinates and no destination yet
@@ -59,17 +63,24 @@ function knightMoves (knightLocation, knightDestination) {
         const { row, col, distance } = current;
 
         // Process node
+
         
         // Add neighbors
-        for (const neighbpr of getCurrentNeighbors(row, col)){
+        for (const neighbor of getCurrentNeighbors(row, col)){
             // Use array destructuring to get neighbor coordinates
             const [neighborRow, neighborCol] = neighbor;
+            const currentNeighborNode = new Node(neighborRow, neighborCol, distance + 1);
+
 
             // Check if neighboring node is outside of the board's boundaries
             if (neighborRow < 0 || neighborCol < 0){
                 return;
             }
-            if (visited.has()) continue;
+            // Pass in Current Neighbor Node with getPositionToString method, that will return a specific string that identifies a node on its location
+            if (visited.has(currentNeighborNode.getPositionToString())) continue;
+
+            // push current neighbor onto queue to be processed
+            queue.push(currentNeighborNode);
         }
     }
 }
