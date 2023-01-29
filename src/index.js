@@ -5,17 +5,14 @@ const content = document.getElementById('content');
 
 const board = document.createElement('div');
 
-class Knight {
-    constructor(row, col){
-        this.row = row;
-        this.col = col;
-    }
-}
+const possibleMoves = [[-1, 2], [-2, 1], [-1, -2], [-2, -1], [1, 2], [2, 1], [1, -2], [2, -1]];
 
-class Destination {
-    constructor(row, col){
+
+class Knight {
+    constructor(row, col, destCoor){
         this.row = row;
         this.col = col;
+        this.destCoor = destCoor;
     }
 }
 
@@ -48,6 +45,4 @@ console.log(knightCol);
 document.addEventListener('click', function(event){
     let destCol = event.target.getAttribute('column');
     let destRow = event.target.parentNode.getAttribute('row');
-    const destination = new Destination(destRow, destCol);
-    console.log(destination);
 })
