@@ -64,6 +64,10 @@ function knightMoves (destRow, destCol) {
 
         // Process node
 
+        // if the destination row and column are equivalent to the row and column of the knight, return the distance
+        if (row === destRow && col === destCol){
+            return distance;
+        }
         
         // Add neighbors
         for (const neighbor of getCurrentNeighbors(row, col)){
