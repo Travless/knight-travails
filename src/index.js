@@ -9,10 +9,10 @@ const possibleMoves = [[-1, 2], [-2, 1], [-1, -2], [-2, -1], [1, 2], [2, 1], [1,
 
 // Knight class to store knight's current location (via its row and column), as well as its destination coordinates
 class Node {
-    constructor(row, col, destCoor){
+    constructor(row, col, distance){
         this.row = row;
         this.col = col;
-        this.destCoor = destCoor;
+        this.distance = distance;
     }
 }
 
@@ -56,7 +56,7 @@ function knightMoves (knightLocation, knightDestination) {
         // Remove first node from queue
         const current = queue.shift();
         // Destructure properties of knight class to current node
-        const { row, col, destCoor } = current;
+        const { row, col, distance } = current;
 
         // Process node
         
