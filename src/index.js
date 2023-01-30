@@ -39,8 +39,24 @@ const chessBoard = (() => {
     }
 })
 
+// will take the current row and col, and try to make a move in any of the possibleMoves available
 function getCurrentNeighbors(){
+    // Create empty array to house neighbors
+    const neighbors = [];
 
+    // loop through possibleMoves array assigning either coordinate (rowChange, colChange) to a direction
+    for (move of possibleMoves){
+        const [rowChange, colChange] = directions;
+
+        // Assign neighborRow and neighborCol via the row/col in addition to their respective change amounts
+        const neighborRow = row + rowChange;
+        const neighborCol = col + colChange;
+
+        neighbors.push([neighborRow, neighborCol]);
+    }
+
+    // return list of neighbots
+    return neighbors;
 }
 
 // Create function that takes in the knight's current location and it's destination coordinates, and uses breadth first traversal (level order) to scan the nodes created for the shortest path to the destination
@@ -68,6 +84,8 @@ function knightMoves (destRow, destCol) {
         if (row === destRow && col === destCol){
             return distance;
         }
+
+        visited.add(current.getPositionToString();)
         
         // Add neighbors
         for (const neighbor of getCurrentNeighbors(row, col)){
